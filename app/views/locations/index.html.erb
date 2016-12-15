@@ -41,11 +41,9 @@ async defer></script>
       }
 
     </script>
-<span id="the-switch" style="display:none;">All</span>
-<h1 id="hide">hello world</h1>
-<button type="button" id="hider">Hide it</button>
 <div class="container" align="middle">
-  <button class = "btn btn new-location">Add a New Location</button>
+
+  <button class="btn btn new-location">Add a Location</button>
 
   <button id="All" class="filter btn  btn-all active">View All</button>
 
@@ -69,16 +67,9 @@ async defer></script>
 
   <button id="Data" class="filter btn btn-datamap ">Data Map</button>
 
+  <button class="btn btn-itineray"><%= link_to "Itineraries", crawls_path %></button>
+
 </div>
 <div id="map-box"></div>
 <div id="legend"></div>
-hi
-
-<ul>
-  <% @locations.each do |location| %>
-    <%=location.name%>
-    <br>
-    <%=location.description%>
-    <hr>
-  <% end %>
-</ul>
+<span id="the-switch" style="display:none;">All</span>

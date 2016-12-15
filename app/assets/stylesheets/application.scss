@@ -2,10 +2,9 @@
 @import "bootstrap";
 
 #map-box {
-  height: 600px;
+  height: 700px;
   width: 100%;
   margin-top:20px;
-  margin-bottom: 20px;
 }
 
 .btn-landmark {
@@ -40,6 +39,12 @@
 
 .btn-bar {
   background-color: #5821CF;
+  color: white;
+  outline: none !important;
+}
+
+.btn-itinerary {
+  background-color: silver;
   color: white;
   outline: none !important;
 }
@@ -107,4 +112,16 @@
 
 #zero {
   background-color: #fee5d9;
+}
+
+.navbar-header a{
+  color: #FFE20A;
+}
+
+.navbar-inverse {
+  background-color: #171A1C;
+}
+
+h3 {
+  margin: 5px 0px 0px 0px;
 }
