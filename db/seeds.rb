@@ -5,6 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Location.all.each {|l| l.destroy}
+
 Location.create!(name: "Mill Ends Park", description: "The worlds smallest park and only colony for leprechauns west of Ireland", category: "Park", website: "http://www.portlandoregon.gov/parks/finder/index.cfm?&propertyid=265&action=ViewPark", streetview: "https://www.google.com/maps/@45.5162226,-122.6732819,3a,59.8y,112.67h,76.58t/data=!3m6!1e1!3m4!1sU6OLK8XlSdl2_1kucp7ffw!2e0!7i13312!8i6656!6m1!1e1", latitude: 45.5161523, longitude: -122.6731808)
 Location.create!(name: "The Shanghai Tunnels", description: "Under the city streets lie a series of tunnels that give a clue to Portland’s criminal past. Able-bodied men were kidnapped and sent to work on boats presumably on their way to Shanghai.", category: "Museum", website: "https://www.portlandtunnels.com", streetview: "https://www.google.com/maps/@45.5244049,-122.6734302,3a,75y,108.7h,80.35t/data=!3m6!1e1!3m4!1ss0OwsFMqgRl1ZdYTp0ADWQ!2e0!7i13312!8i6656!6m1!1e1", latitude: 45.5244049, longitude: -122.6755372)
 Location.create!(name: "The FreakybutTrue Peculiarium and Museum", description: "An emporium for the weird, creepy, rare, and just plain gross from Bigfoot to an alien autopsy to dried-scorpion topped ice cream this place has it all.", category: "Museum", website: "http://www.peculiarium.com/", streetview: "https://www.google.com/maps/place/The+Freakybuttrue+Peculiarium+and+Museum/49509e4474efa2f:0xcce8ab3bef0a877c!8m2!3d45.5354291!4d-122.6975847!6m1!1e1", latitude: 45.5354291, longitude: 122.6997734)
