@@ -8,39 +8,76 @@ async defer></script>
           zoom: 11,
           styles: [{"featureType":"all","stylers":[{"saturation":0},{"hue":"#e7ecf0"}]},{"featureType":"road","stylers":[{"saturation":-70}]},{"featureType":"transit","stylers":[{"visibility":"off"}]},{"featureType":"poi","stylers":[{"visibility":"off"}]},{"featureType":"water","stylers":[{"visibility":"simplified"},{"saturation":-60}]}]
         });
-
-
+        console.log($('#the-switch').html())
         <% @locations.each do |location| %>
-        var infoWindow<%=location.id%>;
-        var catName = "<%= location.category.downcase %>"
-        var iconPath = "../../../public/images/" + catName + ".png"
-        var marker<%=location.id%> = new google.maps.Marker({
-          position: {lat: <%=location.latitude.to_f %>, lng: <%=location.longitude.to_f %>},
-          map: map
-        });
-        var contentString<%=location.id%> = '<a href="<%= location.website.to_s %>" target="_blank"><h3><%= location.name.to_s %></h3></a><br><%= location.description.to_s %><br> <em>Category: <%= location.category.to_s %></em> <br> <a href="<%= location.streetview.to_s %>" target="_blank">Street View</a> <br>';
+          var filterVariable = $('#the-switch').html();
+          if ("<%=location.category%>" == filterVariable || filterVariable == "All") {
+            var infoWindow<%=location.id%>;
+            var catName = "<%= location.category.downcase %>"
+            var iconPath = "../../../public/images/" + catName + ".png"
+            var marker<%=location.id%> = new google.maps.Marker({
+              position: {lat: <%=location.latitude.to_f %>, lng: <%=location.longitude.to_f %>},
+              map: map
+            });
+            var contentString<%=location.id%> = '<a href="<%= location.website.to_s %>" target="_blank"><h3><%= location.name.to_s %></h3></a><br><%= location.description.to_s %><br> <em>Category: <%= location.category.to_s %></em> <br> <a href="<%= location.streetview.to_s %>" target="_blank">Street View</a> <br>';
 
-        //add info window to marker, close other info window when opening a new one
-        google.maps.event.addListener(marker<%=location.id%>, 'click', function() {
-          <% @locations.each do |loc_id| %>
-            if (infoWindow<%=loc_id.id%> !== void 0) {
-              infoWindow<%=loc_id.id%>.close();
-            }
-          <% end %>
-          infoWindow<%=location.id%> = new google.maps.InfoWindow({
-            content: contentString<%=location.id%>
-          });
-          infoWindow<%=location.id%>.open(map, marker<%=location.id%>);
-        });
-        marker<%=location.id%>.setMap(map);
-
+            //add info window to marker, close other info window when opening a new one
+            google.maps.event.addListener(marker<%=location.id%>, 'click', function() {
+              <% @locations.each do |loc_id| %>
+                if (infoWindow<%=loc_id.id%> !== void 0) {
+                  infoWindow<%=loc_id.id%>.close();
+                }
+              <% end %>
+              infoWindow<%=location.id%> = new google.maps.InfoWindow({
+                content: contentString<%=location.id%>
+              });
+              infoWindow<%=location.id%>.open(map, marker<%=location.id%>);
+            });
+            marker<%=location.id%>.setMap(map);
+          }
         <% end %>
-
       }
-    </script>
+      $(document).on('turbolinks:load', function() {
+        $('.filter').each(function() {
+          var iD = $(this).attr('id').to_String();
+          $('#' + iD).on('click', function() {
+            $('#the-switch').html(iD);
+            console.log($('#the-switch').html())
+            initMap();
+          })
+        })
+      })
 
+    </script>
+<span id="the-switch" style="display:none;">All</span>
 <h1 id="hide">hello world</h1>
 <button type="button" id="hider">Hide it</button>
+<div class="container" align="middle">
+  <button class = "btn btn new-location">Add a New Location</button>
+
+  <button id="All" class="filter btn  btn-all active">View All</button>
+
+  <button id="Landmark" class="filter btn btn-landmark ">Landmarks</button>
+
+  <button id="Park" class="filter btn btn-park ">Parks</button>
+
+  <button id="Entertainment" class="filter btn btn-entertainment ">Entertainment</button>
+
+  <button id="Food" class="filter btn btn-food ">Food</button>
+
+  <button id="Store" class="filter btn btn-store ">Stores</button>
+
+  <button id="Bars" class="filter btn btn-bar ">Bars</button>
+
+  <button id="Hotel" class="filter btn btn-hotel ">Hotels</button>
+
+  <button id="Museum" class="filter btn btn-museum ">Museums</button>
+
+  <button id="Other" class="filter btn btn-other ">Other</button>
+
+  <button id="Museum" class="filter btn btn-datamap ">Data Map</button>
+
+</div>
 <div id="map-box">
 
 </div>
