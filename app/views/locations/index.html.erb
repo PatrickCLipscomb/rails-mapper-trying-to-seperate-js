@@ -15,7 +15,7 @@ async defer></script>
             var marker<%=location.id%> = new google.maps.Marker({
               position: {lat: <%=location.latitude.to_f %>, lng: <%=location.longitude.to_f %>},
               map: map,
-              icon: "assets/<%=location.category.downcase%>.png"
+              icon: "images/<%=location.category.downcase%>.png"
             });
             var contentString<%=location.id%> = '<a href="<%= location.website.to_s %>" target="_blank"><h3><%= location.name.to_s %></h3></a><br><%= location.description.to_s %><br> <em>Category: <%= location.category.to_s %></em> <br> <a href="<%= location.streetview.to_s %>" target="_blank">Street View</a> <br>';
 
