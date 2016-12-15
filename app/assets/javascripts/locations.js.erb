@@ -12,16 +12,19 @@ $(document).on('turbolinks:load', function() {
     })
   })
 })
-
+// creates the bars per neighborhood datalayer
 function dataMap(map) {
+  var infoWindow = new google.maps.InfoWindow({
+    content: ""
+  });
   var featureNumber = <%= Location.first.number_of_bars() %>
   console.log(featureNumber)
   console.log(getColor(featureNumber))
     var neighborhood = new google.maps.Data();
     neighborhood.loadGeoJson('https://gist.githubusercontent.com/SamiAljamal/6dc9409bbfa932e21669f53e1de7672b/raw/962ec9c9e63a0bf3e946fb59f980dabb38a78625/porltand.json');
-    neighborhood.setStyle(function(featureNumber) {
+    neighborhood.setStyle(function(feature) {
       return {
-        fillColor: getColor(featureNumber),
+        fillColor: getColor(feature.getProperty('bars')),
         fillOpacity: 0.8,
         strokeColor: '#b3b3b3',
         strokeWeight: 1,
@@ -35,9 +38,21 @@ function dataMap(map) {
         zIndex: 2
       });
     });
+    neighborhood.addListener('mouseout', function(e) {
+      neighborhood.revertStyle();
+    });
+    neighborhood.addListener('click', function(e) {
+      console.log(e);
+      infoWindow.setContent('<div style="line-height:1.00;overflow:hidden;white-space:nowrap;">' +
+        e.feature.getProperty('name') + '<br> bars: ' +
+        e.feature.getProperty('bars') + '</div>');
+      var anchor = new google.maps.MVCObject();
+      anchor.set("position", e.latLng);
+      infoWindow.open(map, anchor);
+    });
     neighborhood.setMap(map);
 }
-
+// sets the color for each neighborhood based on number of bars
 function getColor(featureNumber) {
   var colors = [
     '#fee5d9',
