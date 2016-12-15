@@ -8,16 +8,14 @@ async defer></script>
           zoom: 11,
           styles: [{"featureType":"all","stylers":[{"saturation":0},{"hue":"#e7ecf0"}]},{"featureType":"road","stylers":[{"saturation":-70}]},{"featureType":"transit","stylers":[{"visibility":"off"}]},{"featureType":"poi","stylers":[{"visibility":"off"}]},{"featureType":"water","stylers":[{"visibility":"simplified"},{"saturation":-60}]}]
         });
-        console.log($('#the-switch').html())
         <% @locations.each do |location| %>
           var filterVariable = $('#the-switch').html();
           if ("<%=location.category%>" == filterVariable || filterVariable == "All") {
             var infoWindow<%=location.id%>;
-            var catName = "<%= location.category.downcase %>"
-            var iconPath = "../../../public/images/" + catName + ".png"
             var marker<%=location.id%> = new google.maps.Marker({
               position: {lat: <%=location.latitude.to_f %>, lng: <%=location.longitude.to_f %>},
-              map: map
+              map: map,
+              icon: "assets/<%=location.category.downcase%>.png"
             });
             var contentString<%=location.id%> = '<a href="<%= location.website.to_s %>" target="_blank"><h3><%= location.name.to_s %></h3></a><br><%= location.description.to_s %><br> <em>Category: <%= location.category.to_s %></em> <br> <a href="<%= location.streetview.to_s %>" target="_blank">Street View</a> <br>';
 
@@ -36,17 +34,10 @@ async defer></script>
             marker<%=location.id%>.setMap(map);
           }
         <% end %>
-      }
-      $(document).on('turbolinks:load', function() {
-        $('.filter').each(function() {
-          var iD = $(this).attr('id').to_String();
-          $('#' + iD).on('click', function() {
-            $('#the-switch').html(iD);
-            console.log($('#the-switch').html())
-            initMap();
-          })
+        $('#Data').on('click', function() {
+          dataMap(map);
         })
-      })
+      }
 
     </script>
 <span id="the-switch" style="display:none;">All</span>
@@ -67,7 +58,7 @@ async defer></script>
 
   <button id="Store" class="filter btn btn-store ">Stores</button>
 
-  <button id="Bars" class="filter btn btn-bar ">Bars</button>
+  <button id="Bar" class="filter btn btn-bar ">Bars</button>
 
   <button id="Hotel" class="filter btn btn-hotel ">Hotels</button>
 
@@ -75,7 +66,7 @@ async defer></script>
 
   <button id="Other" class="filter btn btn-other ">Other</button>
 
-  <button id="Museum" class="filter btn btn-datamap ">Data Map</button>
+  <button id="Data" class="filter btn btn-datamap ">Data Map</button>
 
 </div>
 <div id="map-box">

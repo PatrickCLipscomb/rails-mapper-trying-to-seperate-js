@@ -66,3 +66,12 @@
   background-color: #006600;
   color:black;
 }
+
+.active {
+  background-color: #0059b3;
+  color: white;
+}
+
+.active:focus {
+  color: white;
+}

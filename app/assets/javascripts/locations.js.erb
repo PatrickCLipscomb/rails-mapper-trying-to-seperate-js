@@ -1,1 +1,54 @@
 
+$(document).on('turbolinks:load', function() {
+  $('.filter').each(function() {
+    var iD = $(this).attr('id').toString()
+    $('#' + iD).on('click', function() {
+      $('#the-switch').html(iD);
+      $('.filter').each(function() {
+        $(this).removeClass('active');
+      })
+      $(this).addClass('active');
+      initMap();
+    })
+  })
+})
+
+function dataMap(map) {
+  var featureNumber = <%= Location.first.number_of_bars() %>
+  console.log(featureNumber)
+  console.log(getColor(featureNumber))
+    var neighborhood = new google.maps.Data();
+    neighborhood.loadGeoJson('https://gist.githubusercontent.com/SamiAljamal/6dc9409bbfa932e21669f53e1de7672b/raw/962ec9c9e63a0bf3e946fb59f980dabb38a78625/porltand.json');
+    neighborhood.setStyle(function(featureNumber) {
+      return {
+        fillColor: getColor(featureNumber),
+        fillOpacity: 0.8,
+        strokeColor: '#b3b3b3',
+        strokeWeight: 1,
+        zIndex: 1
+      };
+    });
+    neighborhood.addListener('mouseover', function(e) {
+      neighborhood.overrideStyle(e.feature, {
+        strokeColor: '#2a2a2a',
+        strokeWeight: 2,
+        zIndex: 2
+      });
+    });
+    neighborhood.setMap(map);
+}
+
+function getColor(featureNumber) {
+  var colors = [
+    '#fee5d9',
+    '#fcae91',
+    '#fb6a4a',
+    '#de2d26',
+    '#a50f15'
+  ];
+  return featureNumber >= 25 ? colors[4] :
+    featureNumber > 15 ? colors[3] :
+    featureNumber > 3 ? colors[2] :
+    featureNumber > 0 ? colors[1] :
+    colors[0];
+}
