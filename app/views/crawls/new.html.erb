@@ -1,7 +1,25 @@
 <%= form_for @crawl do |f| %>
   <div class="field">
-    <h4>What Shall We Call Your Crawl?</h4>
+    <h4>What shall we call your crawl?</h4>
     <%= f.label :name %>
     <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <h4>How are you going to get around?</h4>
+    <span class="mode-radio">
+      <%= radio_button_tag(:mode, "BICYCLING") %>
+      <%= label_tag(:mode, "Bicycling") %>
+    </span>
+    <span class="mode-radio">
+      <%= radio_button_tag(:mode, "WALKING") %>
+      <%= label_tag(:mode, "Walking") %>
+    </span>
+    <span class="mode-radio">
+      <%= radio_button_tag(:mode, "DRIVING") %>
+      <%= label_tag(:mode, "Driving") %>
+    </span>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
   </div>
 <% end %>

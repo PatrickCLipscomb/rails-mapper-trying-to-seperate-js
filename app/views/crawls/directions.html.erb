@@ -46,14 +46,20 @@ async defer></script>
     <% end %>
     calcRoute(directionsService, directionsDisplay)
     function calcRoute(directionsService, directionsDisplay) {
-
-        var request = {
-          origin: {lat: <%= @locations.first.latitude.to_f%>, lng: <%= @locations.first.longitude.to_f %>},
-          destination: {lat: <%=@locations.last.latitude.to_f%>, lng: <%=@locations.last.longitude.to_f%>},
-          travelMode: 'BICYCLING',
-          waypoints: waypoints_array
-        };
-
+        <% if @locations.length > 2 %>
+          var request = {
+            origin: {lat: <%= @locations.first.latitude.to_f%>, lng: <%= @locations.first.longitude.to_f %>},
+            destination: {lat: <%=@locations.last.latitude.to_f%>, lng: <%=@locations.last.longitude.to_f%>},
+            travelMode: '<%=@crawl.mode%>',
+            waypoints: waypoints_array
+          };
+        <% else %>
+          var request = {
+            origin: {lat: <%= @locations.first.latitude.to_f%>, lng: <%= @locations.first.longitude.to_f %>},
+            destination: {lat: <%=@locations.last.latitude.to_f%>, lng: <%=@locations.last.longitude.to_f%>},
+            travelMode: '<%=@crawl.mode%>',
+          };
+        <% end %>
       directionsService.route(request, function(result, status) {
         if (status == 'OK') {
           directionsDisplay.setDirections(result);

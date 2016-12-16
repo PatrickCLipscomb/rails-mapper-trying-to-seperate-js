@@ -7,6 +7,7 @@ class CrawlsController < ApplicationController
   end
   def create
     @crawl = Crawl.create(crawl_params)
+    @crawl.update(mode: params[:mode])
     redirect_to crawl_path(@crawl)
   end
   def show
@@ -31,6 +32,6 @@ class CrawlsController < ApplicationController
   end
   private
   def crawl_params
-    params.require(:crawl).permit({stops: []}, :name)
+    params.require(:crawl).permit({stops: []}, :name, :mode)
   end
 end
