@@ -11,6 +11,7 @@ class CrawlsController < ApplicationController
   end
   def show
     @crawl = Crawl.find(params[:id])
+    @locations = Location.all
   end
   private
   def crawl_params

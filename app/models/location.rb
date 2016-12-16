@@ -9,4 +9,10 @@ class Location < ApplicationRecord
     end
     holder
   end
+
+  def crawl_add(crawl_id)
+    crawl = Crawl.find(crawl_id)
+    new_stops = crawl.stops.push(self.id)
+    crawl.update(stops: new_stops)
+  end
 end
