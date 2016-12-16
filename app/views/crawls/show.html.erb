@@ -17,7 +17,7 @@ async defer></script>
           map: map,
           icon: "../images/<%=location.category.downcase%>.png"
         });
-        var contentString<%=location.id%> = '<a href="<%= location.website.to_s %>" target="_blank"><h3><%= location.name.to_s %></h3></a><button id="loc-<%=location.id%>" class="crawl-adder">ADD TO YOUR CRAWL</button></h3><br><%= location.description.to_s %><br> <em>Category: <%= location.category.to_s %></em> <br> <a href="<%= location.streetview.to_s %>" target="_blank">Street View</a> <br>';
+        var contentString<%=location.id%> = '<a href="<%= location.website.to_s %>" target="_blank"><h3><%= location.name.to_s %></h3></a><button class="crawl-adder"><%= link_to "ADD TO YOUR CRAWL", crawl_add_path(location.id)%></button><br><%= location.description.to_s %><br> <em>Category: <%= location.category.to_s %></em> <br> <a href="<%= location.streetview.to_s %>" target="_blank">Street View</a> <br>';
 
         //add info window to marker, close other info window when opening a new one
         google.maps.event.addListener(marker<%=location.id%>, 'click', function() {
@@ -36,25 +36,16 @@ async defer></script>
 
     <% end %>
   }
-  $(document).on("turbolinks:load", function() {
-    <% Location.all.each do |location| %>
-      $('#loc-<%=location.id.to_s%>').on('click', function() {
-        console.log('Hey');
-        <% Location.find(location.id.to_s).crawl_add(@crawl) %>
-        addLocation(<%=location.id%>);
-      })
-    <% end %>
-  })
 
 
 </script>
 
 
-show page
-<%= @crawl.name %>
-<div class="row container">
+
+<h2 align="middle"><%= @crawl.name %> Crawl</h2>
+<div class="row">
   <div class="col-md-2">
-    <div class="btn-group-vertical">
+    <div class="btn-group-vertical verts">
 
         <button id="All" class="filter btn  btn-all active">View All</button>
 
@@ -83,13 +74,16 @@ show page
       </div>
     </div>
     <div class="col-md-2">
-      <h4>Your Selected Locations</h4>
-      <ul style="list-style-type:none;" id="results-list">
+      <h4>Your Selected Locations <span class="text-muted">You may have up to 8 locations</span></h4>
+      <ol id="results-list">
         <% @crawl.stops.each do |id| %>
         <% location = Location.find(id) %>
         <li><%=location.name%></li>
         <%end%>
-      </ul>
+      </ol>
+      <% if @crawl.stops.any? %>
+        <%= link_to "Create This Crawl", directions_path(@crawl), :class => "btn-success crawl-create"%>
+      <% end %>
     </div>
   </div>
 
