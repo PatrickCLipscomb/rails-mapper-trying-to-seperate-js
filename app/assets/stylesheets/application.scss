@@ -61,6 +61,12 @@
   outline: none !important;
 }
 
+.weird-button {
+  background-color: black;
+  color: yellow;
+  outline: none !important;
+}
+
 .crawl-adder {
   color: white;
   margin-top: 5px;
@@ -148,4 +154,27 @@ h3 {
 
 .mode-radio {
   margin-left: 10px;
+}
+
+.crawl-form-wrapper {
+  text-align: center;
+  margin-left: auto;
+  margin-top: 200px;
+  background-color: black;
+  color: white;
+  padding: 30px;
+}
+
+.crawl-form-wrapper #crawl_name {
+  color: black;
+}
+
+.new-background {
+  color: black;
+  width: 100%;
+  height: 100%;
+}
+
+.new_crawl {
+
 }

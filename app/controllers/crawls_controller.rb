@@ -6,7 +6,7 @@ class CrawlsController < ApplicationController
     @crawl = Crawl.new
   end
   def create
-    @crawl = Crawl.create(crawl_params)
+    @crawl = Crawl.new(crawl_params)
     @crawl.update(mode: params[:mode])
     redirect_to crawl_path(@crawl)
   end

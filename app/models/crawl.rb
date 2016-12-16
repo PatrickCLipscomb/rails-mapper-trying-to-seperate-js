@@ -1,4 +1,7 @@
 class Crawl < ApplicationRecord
+  validates :name, :presence => true
+  validates :mode, :presence => true
+
   def get_locations
     locations = []
     self.stops.each do |loc_id|
