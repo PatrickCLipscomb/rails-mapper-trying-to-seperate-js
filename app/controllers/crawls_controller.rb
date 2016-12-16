@@ -6,8 +6,14 @@ class CrawlsController < ApplicationController
     @crawl = Crawl.new
   end
   def create
-
+    @crawl = Crawl.create(crawl_params)
+    render :show
+  end
+  def show
+    @crawl = Crawl.find(params[:id])
   end
   private
-  # params.require(:crawl).permit({stops: []}, :name)
+  def crawl_params
+    params.require(:crawl).permit({stops: []}, :name)
+  end
 end
