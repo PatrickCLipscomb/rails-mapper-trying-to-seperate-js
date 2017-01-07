@@ -17,7 +17,7 @@ async defer></script>
           map: map,
           icon: "../images/<%=location.category.downcase%>.png"
         });
-        var contentString<%=location.id%> = '<a href="<%= location.website.to_s %>" target="_blank"><h3><%= location.name.to_s %></h3></a><button class="crawl-adder"><%= link_to "ADD TO YOUR CRAWL", crawl_add_path(location.id)%></button><br><%= location.description.to_s %><br> <em>Category: <%= location.category.to_s %></em> <br> <a href="<%= location.streetview.to_s %>" target="_blank">Street View</a> <br>';
+        var contentString<%=location.id%> = '<a href="<%= location.website.to_s %>" target="_blank"><h3><%= location.name.to_s %></h3></a><button class="crawl-adder"><%= link_to "ADD TO YOUR CRAWL", crawl_add_path(location.id), remote: true%></button><br><%= location.description.to_s %><br> <em>Category: <%= location.category.to_s %></em> <br> <a href="<%= location.streetview.to_s %>" target="_blank">Street View</a> <br>';
 
         //add info window to marker, close other info window when opening a new one
         google.maps.event.addListener(marker<%=location.id%>, 'click', function() {

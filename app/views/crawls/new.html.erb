@@ -10,17 +10,18 @@
         <h4>How are you going to get around?</h4>
         <span class="mode-radio">
           <%= radio_button_tag(:mode, "BICYCLING") %>
-          <%= label_tag(:mode, "Bicycling") %>
+          <%= label_tag(:mode, "Bicycling (Beta)") %>
         </span>
         <span class="mode-radio">
           <%= radio_button_tag(:mode, "WALKING") %>
-          <%= label_tag(:mode, "Walking") %>
+          <%= label_tag(:mode, "Walking (Experimental)") %>
         </span>
         <span class="mode-radio">
           <%= radio_button_tag(:mode, "DRIVING") %>
           <%= label_tag(:mode, "Driving") %>
         </span>
       </div>
+      <br>
       <div class="actions">
         <%= f.submit :class => "weird-button"%>
       </div>

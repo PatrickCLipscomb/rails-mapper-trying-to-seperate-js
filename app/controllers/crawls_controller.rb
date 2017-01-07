@@ -21,9 +21,13 @@ class CrawlsController < ApplicationController
     array = @crawl.stops
     if !array.include?(@location.id) && array.length < 8
       array = array.push(@location.id)
+      @crawl.update(stops: array)
+      respond_to do |format|
+        format.js
+      end
+    else
+      render :show
     end
-    @crawl.update(stops: array)
-    render :show
   end
   def directions
     @crawl = Crawl.find(params[:id])

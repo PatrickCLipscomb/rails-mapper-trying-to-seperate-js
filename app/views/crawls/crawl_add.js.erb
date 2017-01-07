@@ -1,0 +1,4 @@
+$('#results-list').append('<li><%=@location.name%></li>');
+<% if @crawl.stops.length > 1 %>
+  $('.crawl-create').show();
+<% end %>
