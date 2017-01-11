@@ -81,9 +81,7 @@ async defer></script>
         <li><%=location.name%></li>
         <%end%>
       </ol>
-      <% if @crawl.stops.length > 1 %>
         <%= link_to "Create This Crawl", directions_path(@crawl), :class => "btn-success crawl-create"%>
-      <% end %>
     </div>
   </div>
 
