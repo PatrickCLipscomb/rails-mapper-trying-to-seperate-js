@@ -35,6 +35,14 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
   gem 'byebug', platform: :mri
+  gem 'rspec-rails'
+  gem 'poltergeist'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'pry'
+  gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
+  gem 'simplecov', require: false
 end
 
 group :development do
