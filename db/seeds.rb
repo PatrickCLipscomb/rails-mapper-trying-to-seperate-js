@@ -64,7 +64,7 @@ Location.create!(category: "Entertainment",
       website: "http://www.thegreenmicrogymbelmont.com/"
     )
 Location.create!(category: "Entertainment",
-      description: "Two-story bar, restaurant and game room featuring video games and pinball machines dating from the '70s through present day.",
+      description: "Two-story bar, restaurant and game room featuring video games and pinball machines dating from the 70s through present day.",
       latitude: 45.5237881,
       longitude: -122.675846,
       name: "Ground Kontrol Classic Arcade",
